@@ -1,13 +1,15 @@
 # run locally
 
 to run the server,
-open the terminal in the skyline-robotics-task path file directory and run: 
+open the terminal in the skyline-robotics-task file directory and run: 
 ```
 npm start
   ```
   
 the server will run on 
-#### http://localhost:8080/
+```
+http://localhost:8080/
+  ```
   
 * use postman to send requests locally
   

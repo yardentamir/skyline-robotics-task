@@ -24,10 +24,11 @@ http://localhost:8080/
   ```
 
 in raw section, choose JSON and write json like this:
-warning: you can send only one by one.
 ```
 {"timestamp": 1658610078, "1123": 177, "9992": -1, "0883": 3}
   ```
+warning: you can send only one by one.
+
 ## get statistics request
 ### GET request
 

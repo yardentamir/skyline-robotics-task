@@ -11,9 +11,7 @@ the server will run on
 http://localhost:8080/
   ```
   
-* use postman to send requests locally
-  
-open postman 
+* open and use postman to send requests locally
 
 ## Add robots per timestamp request
 ### POST request

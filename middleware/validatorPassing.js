@@ -45,7 +45,3 @@ const isRobotIdHasOnlyDigits = (robotId) => {
 const isValidTimestamp = (timestamp) => {
   return new Date(timestamp).getTime() > 0;
 };
-
-const isDuplicatedRobot = (robotsInMap, robotId, timestampInMap, timestamp) => {
-  return robotsInMap.has(robotId) && timestampInMap === timestamp;
-};

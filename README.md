@@ -30,7 +30,7 @@ docker build --tag skyline-robotics-task .
 
 To run docker container, run the command: 
 ```
-docker run -p 8080:8000 --name skyline-robotics-task -d skyline-robotics-task
+docker run -p 8000:8080 --name skyline-robotics-task -d skyline-robotics-task
   ```
 
 ### Add robots per timestamp request

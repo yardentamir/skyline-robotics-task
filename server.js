@@ -1,9 +1,10 @@
 const express = require("express");
 const app = express();
 const aggregationSystemRouter = require("./routes/aggregationSystem.js");
+const cors = require("cors");
 
+app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 const port = 8080;
 

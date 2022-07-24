@@ -1,23 +1,34 @@
 const validatorPassing = function (req, res, next) {
   const { timestamp, ...robots } = req.body;
   const robotsArray = Object.entries(robots);
+  let isCustomError = false;
   try {
     if (!isValidTimestamp(timestamp)) {
-      throw new Error("Invalid timestamp");
+      isCustomError = true;
+      return res.status(400).send("Invalid timestamp");
     }
 
-    robotsArray.forEach(([robotId, alerts]) => {
+    for (const [robotId, alerts] of robotsArray) {
       if (validateRobotIdConditions(robotId)) {
-        throw new Error("Robot id must be a number and 4 digits");
+        isCustomError = true;
+        res.status(400).send("Robot id must be a number and 4 digits");
       }
-      req.robotsMap.forEach((robotsInMap, timestampInMap) => {
-        if (isDuplicatedRobot(robotsInMap, robotId)) {
-          throw new Error("Robot already exists");
-        }
-      });
-    });
 
-    next();
+      for (const [timestampInMap, robotsInMap] of req.robotsMap) {
+        if (isDuplicatedRobot(robotsInMap, robotId)) {
+          isCustomError = true;
+          res.status(400).send("Robot already exists");
+          break;
+        }
+      }
+      if (isCustomError) {
+        break;
+      }
+    }
+
+    if (!isCustomError) {
+      next();
+    }
   } catch (error) {
     next(error);
   }

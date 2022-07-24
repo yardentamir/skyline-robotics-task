@@ -10,7 +10,7 @@ const addRobotsController = (req, res) => {
       .send(`robots added successfully for timestamp ${timestamp}`);
     console.log(req.robotsMap);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send(error.message);
   }
 };
 

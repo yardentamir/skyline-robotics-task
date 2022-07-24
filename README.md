@@ -1,3 +1,26 @@
+# run on cloud
+
+### Add robots per timestamp request
+
+Choose POST request and send a request to:
+```
+https://skyline-robotics-task.herokuapp.com
+  ```
+
+Send request body (JSON) like this:
+* one timestamp and one or more robot ids with number of alerts
+```
+{"timestamp": 1658610078, "1123": 177, "9992": -1, "0883": 3}
+  ```
+Warning: You can only send only one by one.
+
+### get statistics request
+
+Choose GET request and send a request to:
+```
+https://skyline-robotics-task.herokuapp.com/statistics
+  ```
+
 # run locally
 
 First, You need to install all the dependencies, to do that run the command below in the terminal:

@@ -2,7 +2,7 @@ const statisticsController = (req, res) => {
   const response = {
     top10LastMinuteMostAlerts: [],
     top10LastHourMostAlerts: [],
-    crashedLast24Hours: [],
+    crashedLast24Hours: {},
   };
 
   try {
@@ -43,19 +43,19 @@ const inTheLastTime = (currentDate, time, timeType) => {
 };
 
 const getTopTenRobotsMostAlertsLastTime = (robots, time, timeType) => {
-  const currentDate = new Date(); //23.7.2022 12:00:00      //inTheLastTime = 1 minute
-  const fromTime = inTheLastTime(currentDate, time, timeType); //23.7.2022 11:59:00
+  const currentDate = new Date();
+  const fromTime = inTheLastTime(currentDate, time, timeType);
   const robotsMapSortedTimestamp = getRobotsFilteredMapByTimestamp(
     robots,
     fromTime
-  ); // sort by the timestamp
+  );
 
   const requiredRobotsMap = [];
   robotsMapSortedTimestamp.forEach(([k, v]) => {
     requiredRobotsMap.push(Object.entries(Object.fromEntries(v)));
   });
 
-  const sorted = requiredRobotsMap.flat().sort((a, b) => b[1] - a[1]); //sort by the number of alerts
+  const sorted = requiredRobotsMap.flat().sort((a, b) => b[1] - a[1]);
   return sorted.map((arr) => arr[0]).slice(0, 10);
 };
 

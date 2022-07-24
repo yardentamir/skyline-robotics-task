@@ -5,7 +5,7 @@ const validatorPassing = function (req, res, next) {
   try {
     if (!isValidTimestamp(timestamp)) {
       isCustomError = true;
-      return res.status(400).send("Invalid timestamp");
+      res.status(400).send("Invalid timestamp");
     }
 
     for (const [robotId, alerts] of robotsArray) {
@@ -13,13 +13,9 @@ const validatorPassing = function (req, res, next) {
         isCustomError = true;
         res.status(400).send("Robot id must be a number and 4 digits");
       }
-
-      for (const [timestampInMap, robotsInMap] of req.robotsMap) {
-        if (isDuplicatedRobot(robotsInMap, robotId)) {
-          isCustomError = true;
-          res.status(400).send("Robot already exists");
-          break;
-        }
+      if (typeof alerts !== "number") {
+        isCustomError = true;
+        res.status(400).send("Alerts must be a number");
       }
       if (isCustomError) {
         break;
@@ -50,10 +46,6 @@ const isValidTimestamp = (timestamp) => {
   return new Date(timestamp).getTime() > 0;
 };
 
-// const isDuplicatedRobot = (robotsInMap, robotId, timestampInMap, timestamp) => {
-//   return robotsInMap.has(robotId) && timestampInMap === timestamp;
-// };
-
-const isDuplicatedRobot = (robotsInMap, robotId) => {
-  return robotsInMap.has(robotId);
+const isDuplicatedRobot = (robotsInMap, robotId, timestampInMap, timestamp) => {
+  return robotsInMap.has(robotId) && timestampInMap === timestamp;
 };

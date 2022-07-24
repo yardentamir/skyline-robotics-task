@@ -73,7 +73,9 @@ const getAllCrashedRobots = (robotsMap, time, timeType) => {
     const valuesToSetMap = new Map(
       Object.entries(v).filter(([id, state]) => state === -1)
     );
-    crashedRobots.set(k, [...valuesToSetMap.keys()]);
+    if (valuesToSetMap.size > 0) {
+      crashedRobots.set(k, [...valuesToSetMap.keys()]);
+    }
   });
 
   return Object.fromEntries(crashedRobots);
